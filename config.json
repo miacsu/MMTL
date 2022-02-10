@@ -1,6 +1,6 @@
 {
     "dataset":                  "ADNI1",
-    "external_dataset":         ["ADNI2", "MIRIAD"],
+    "external_dataset":         [],
     "folds":                    [0],
     "gpus":                     [0],
     "seed":                     0,
