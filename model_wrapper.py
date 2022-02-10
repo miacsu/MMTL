@@ -59,7 +59,7 @@ class CNN_Wrapper:
         self.optimal_valid_metric = 0.0
         self.frequency_dict = None
 
-    def cross_validation(self, cross_index):
+    def cross_validation(self, cross_index, process):
         self.cross_index = cross_index
         with open("lookupcsv/{}.csv".format(self.dataset), 'r') as csv_file:
             num = len(list(csv.reader(csv_file))) // 10
@@ -68,8 +68,10 @@ class CNN_Wrapper:
         with open(self.checkpoint_dir + 'valid_result.txt', 'w') as file:
             file.write('')
         self.prepare_dataloader(start, end)
-        self.train()
-        self.test()
+        if process != "test":
+            self.train()
+        if process != "train":
+            self.test()
 
     def prepare_dataloader(self, start, end):
         train_data = CNN_Data(self.Data_dir, stage='train', dataset=self.dataset, cross_index=self.cross_index,
