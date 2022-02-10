@@ -1,4 +1,4 @@
-Copyright (C) 2022 Xu Tian (tianxu@csu.edu.cn), Jin Liu (liujin06@csu.edu.cn)
+Copyright (C) 2022 Xu Tian (tianxu@csu.edu.cn), Rui Guo (guorui@csu.edu.cn), Jin Liu (liujin06@csu.edu.cn)
 
 ## Package Title: 
 A Fully Automated MRI-based Multi-task Decoupling Representation Learning for Alzheimer’s Disease Detection and MMSE Score Prediction
