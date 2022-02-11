@@ -30,6 +30,6 @@ This project must run in python>=2.7, The following steps should be taken to run
       
    to complete them separately. 
    
-   5. Using voting strategy based on three results of different brain atlases feature sets .
+ 5. Using voting strategy based on three results of different brain atlases feature sets .
 
-         python Voting.py
+       python Voting.py
