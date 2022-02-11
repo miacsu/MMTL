@@ -1,4 +1,4 @@
-Copyright (C) 2022 Xu Tian (tianxu@csu.edu.cn), Rui Guo (guorui@csu.edu.cn), Jin Liu (liujin06@csu.edu.cn)
+Copyright (C) 2022 Xu Tian (tianxu@csu.edu.cn), Jin Liu (liujin06@csu.edu.cn)
 
 ## Package Title: 
 A Fully Automated MRI-based Multi-task Decoupling Representation Learning for Alzheimer’s Disease Detection and MMSE Score Prediction
@@ -19,4 +19,13 @@ This project must run in python>=2.7, The following steps should be taken to run
    
 3. Code running:    
    (1) Information about code running in "config.json" should be modified.   
-   (2) You can use "python main.py" to complete the training and testing of the model, or use "python main.py train" and "python main.py test" to complete them separately. 
+   (2) You can use         
+   
+
+      python main.py   
+   to complete the training and testing of the model, or use  
+
+
+      python main.py train     
+      python main.py test
+   to complete them separately. 
