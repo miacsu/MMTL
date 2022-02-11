@@ -21,11 +21,11 @@ This project must run in python>=2.7, The following steps should be taken to run
    (1) Information about code running in "config.json" should be modified.   
    (2) You can use         
    
-
       python main.py   
+      
    to complete the training and testing of the model, or use  
-
 
       python main.py train     
       python main.py test
+      
    to complete them separately. 
