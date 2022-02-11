@@ -168,6 +168,13 @@ class CNN_Wrapper:
         # Test the model
         print('Fold {} is testing ... '.format(self.cross_index))
 
+        if self.epoch == 0:
+            for root, dirs, files in os.walk(self.checkpoint_dir):
+                for file in files:
+                    if file[-4:] == '.pth':
+                        info = file[4:-4].split('_')
+                        self.optimal_epoch = int(info[0])
+
         # Load the optimal model
         self.model.load_state_dict(torch.load('{}{}_{}.pth'.format(self.checkpoint_dir, self.model_name,
                                                                    self.optimal_epoch)))
