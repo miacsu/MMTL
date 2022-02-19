@@ -1,7 +1,7 @@
 Copyright (C) 2022 Xu Tian (tianxu@csu.edu.cn), Jin Liu (liujin06@csu.edu.cn)
 
 ## Package Title: 
-A Fully Automated MRI-based Multi-task Decoupling Representation Learning for Alzheimer’s Disease Detection and MMSE Score Prediction
+MRI-based Multi-task Decoupling Learning for Alzheimer's Disease Detection and MMSE Score Prediction: A Multi-site Validation
 
 ## Description:   
 This package is designed to enable multi-task decoupled representation learning and automatic diagnosis and MMSE score prediction of AD patients from structural magnetic resonance imaging (sMRI) brain scans.
