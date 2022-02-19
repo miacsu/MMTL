@@ -63,7 +63,7 @@ class CNN_Data(Dataset):
     def __getitem__(self, idx):
         label = self.Label_list[idx]
         demor = self.demor_list[idx]
-        data = np.load(self.Data_dir + self.Data_list[idx] + '.npy').astype(np.float32)
+        data = np.load(self.Data_dir + self.Data_list[idx]).astype(np.float32)
         data = np.expand_dims(data, axis=0)
         return data, label, np.asarray(demor).astype(np.float32)
 

@@ -18,12 +18,14 @@ class CNN_Wrapper:
                  batch_size,
                  balanced,
                  data_dir,
+                 data_dir_ex,
                  learn_rate,
                  train_epoch,
                  dataset,
                  external_dataset,
                  model_name,
-                 metric):
+                 metric,
+                 process):
 
         """
             :param fil_num:    channel number
@@ -41,6 +43,7 @@ class CNN_Wrapper:
         self.epoch = 0
         self.seed = seed
         self.Data_dir = data_dir
+        self.Data_dir_ex = data_dir_ex
         self.learn_rate = learn_rate
         self.train_epoch = train_epoch
         self.balanced = balanced
@@ -51,7 +54,11 @@ class CNN_Wrapper:
         self.cross_index = None
         self.get_con_reg_group_loss = ConRegGroupLoss()
         self.eval_metric = get_acc if metric == 'accuracy' else get_MCC
-        self.checkpoint_dir = './checkpoint_dir/{}_exp{}/'.format(self.model_name, self.cross_index)
+        self.process = process
+        if process == "valid":
+            self.checkpoint_dir = './checkpoint_dir/valid/'
+        else:
+            self.checkpoint_dir = './checkpoint_dir/{}_exp{}/'.format(self.model_name, self.cross_index)
         self.model = _CNN(fil_num=fil_num, drop_rate=drop_rate).cuda()
         self.optimal_epoch = self.epoch
         self.optimal_valid_mse = 99999.0
@@ -59,7 +66,7 @@ class CNN_Wrapper:
         self.optimal_valid_metric = 0.0
         self.frequency_dict = None
 
-    def cross_validation(self, cross_index, process):
+    def cross_validation(self, cross_index):
         self.cross_index = cross_index
         with open("lookupcsv/{}.csv".format(self.dataset), 'r') as csv_file:
             num = len(list(csv.reader(csv_file))) // 10
@@ -68,10 +75,42 @@ class CNN_Wrapper:
         with open(self.checkpoint_dir + 'valid_result.txt', 'w') as file:
             file.write('')
         self.prepare_dataloader(start, end)
-        if process != "test":
+        if self.process != "test":
             self.train()
-        if process != "train":
+        if self.process != "train":
             self.test()
+
+    def validate(self):
+        # Validate the model
+        print('validating')
+
+        # Load the model
+        self.model.load_state_dict(torch.load('checkpoint_dir/valid/valid.pth'))
+        self.model.train(False)
+
+        with torch.no_grad():
+            stage = "test"
+            for i, dataset in enumerate(self.external_dataset):
+                data_dir = self.Data_dir_ex[i]
+                data = CNN_Data(data_dir, stage=stage, dataset=dataset, cross_index=self.cross_index, start=0,
+                                end=-1, seed=self.seed)
+                dataloader = DataLoader(data, batch_size=2, shuffle=False)
+                f_clf = open(self.checkpoint_dir + 'raw_score_clf_{}_{}.txt'.format(dataset, stage), 'w')
+                f_reg = open(self.checkpoint_dir + 'raw_score_reg_{}_{}.txt'.format(dataset, stage), 'w')
+                matrix = [[0, 0], [0, 0]]
+                mse = 0.0
+                for idx, (inputs, labels, demors) in enumerate(dataloader):
+                    inputs, labels = inputs.cuda(), labels.cuda()
+                    clf_output, reg_output, _ = self.model(inputs)
+                    write_raw_score(f_clf, clf_output, labels)
+                    matrix = matrix_sum(matrix, get_confusion_matrix(clf_output, labels))
+                    mse += squared_error(reg_output, demors)
+                    write_raw_score(f_reg, reg_output, demors)
+                mse /= (matrix[0][0] + matrix[0][1] + matrix[1][0] + matrix[1][1])
+                print(dataset + "-" + stage + ' confusion matrix ', matrix)
+                print('accuracy:', "%.4f" % self.eval_metric(matrix), 'and mean squared error ', mse)
+                f_clf.close()
+                f_reg.close()
 
     def prepare_dataloader(self, start, end):
         train_data = CNN_Data(self.Data_dir, stage='train', dataset=self.dataset, cross_index=self.cross_index,
@@ -168,14 +207,13 @@ class CNN_Wrapper:
         # Test the model
         print('Fold {} is testing ... '.format(self.cross_index))
 
+        # Load the optimal model
         if self.epoch == 0:
             for root, dirs, files in os.walk(self.checkpoint_dir):
                 for file in files:
                     if file[-4:] == '.pth':
                         info = file[4:-4].split('_')
                         self.optimal_epoch = int(info[0])
-
-        # Load the optimal model
         self.model.load_state_dict(torch.load('{}{}_{}.pth'.format(self.checkpoint_dir, self.model_name,
                                                                    self.optimal_epoch)))
         self.model.train(False)
