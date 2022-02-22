@@ -6,7 +6,7 @@ MRI-based Multi-task Decoupling Learning for Alzheimer's Disease Detection and M
 ## Description:   
 This package is designed to enable multi-task decoupled representation learning and automatic diagnosis and MMSE score prediction of AD patients from structural magnetic resonance imaging (sMRI) brain scans.
 
-![Framework of our proposed method](image/framework.png)
+![Framework of our proposed method](framework.png)
 <p align="center">Fig. 1. Framework of our proposed method</p>
 
 As is shown in Fig.1. , we propose an MRI-based multi-task decoupled learning (MTDL) approach for AD detection and MMSE score prediction. First, we implement both tasks using the same backbone. We insert three multi-task interaction layers between these two backbones. Each multi-task interaction layer consists of two feature decoupling modules and one feature interaction module. It takes generalizable features for each task and interacts to obtain shared representations for both tasks. Second, in order to further improve the generalization of the features selected by the feature decoupling module, we design a feature consistency loss to further constrain the module. Finally, in order to exploit the special distribution information of MMSE scores in AD group and NC group, we design a distribution loss.
