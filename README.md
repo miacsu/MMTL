@@ -18,6 +18,8 @@ This project must run in python>=2.7, The following steps should be taken to run
 
 1. Data preparation: Before the code can run, the data needs to be prepared. You need to put a file named "dataset.csv" in the "opencsv" folder. "dataset" is the name of the dataset in the configuration file. In this csv files, subjects' AD labels and MMSE scores should be placed in the second and third columns respectively.
 
+To demonstrate this code, we provide data for 10 subjects from the ADNI1 dataset. These subjects were randomly selected from the test set of the experiments for the provided model files. These data are placed in the "data" folder and their label information is in the "opencsv" folder.
+
 2. Environment building:  
     (1) Software: Information about the packages required by the code is at "requirements.txt".   
     (2) Hardware: This code has been tested with NVIDIA GTX2080.
