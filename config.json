@@ -1,0 +1,18 @@
+{
+    "__comments":               "Here is the config file for this code!",
+    "dataset":                  "",
+    "external_dataset":         ["ADNI1"],
+    "folds":                    [],
+    "gpus":                     [0],
+    "seed":                     0,
+    "Data_dir":                 "",
+    "Data_dir_ex":              ["data/ADNI1/"],
+    "cnn": {
+        "fil_num":              10,
+        "drop_rate":            0.137,
+        "batch_size":           4,
+        "balanced":             0,
+        "learning_rate":        0.0001,
+        "train_epochs":         300
+    }
+}
