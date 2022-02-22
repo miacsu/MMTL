@@ -6,7 +6,7 @@
     "gpus":                     [0],
     "seed":                     0,
     "Data_dir":                 "",
-    "Data_dir_ex":              ["../../data/ADNI1Seg_NoBack"],
+    "Data_dir_ex":              ["data/ADNI1/"],
     "cnn": {
         "fil_num":              10,
         "drop_rate":            0.137,

@@ -89,7 +89,7 @@ def read_csv_mt(filename):
         filenames.append(line[0])
         label = 0 if line[1] == 'CN' else 1
         labels.append(label)
-        demor = line[4]
+        demor = line[2]
         demors.append(demor)
     return filenames, labels, demors
 

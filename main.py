@@ -43,7 +43,7 @@ def main(argv):
     if len(argv) != 1:
         print("Error!")
         return
-    process = argv[1]
+    process = argv[0]
 
     # Read related parameters
     config = read_json('./config.json')
@@ -60,6 +60,7 @@ def main(argv):
             time.sleep(60)
     else:
         p = multiprocessing.Process(target=cnn_main, args=(process, gpus[0], -1,))
+        p.start()
 
 
 if __name__ == "__main__":

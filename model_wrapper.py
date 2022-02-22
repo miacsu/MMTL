@@ -82,10 +82,10 @@ class CNN_Wrapper:
 
     def validate(self):
         # Validate the model
-        print('validating')
+        print('validating ...')
 
         # Load the model
-        self.model.load_state_dict(torch.load('checkpoint_dir/valid/valid.pth'))
+        self.model.load_state_dict(torch.load('checkpoint_dir/valid/valid.pth'), strict=False)
         self.model.train(False)
 
         with torch.no_grad():
@@ -215,7 +215,7 @@ class CNN_Wrapper:
                         info = file[4:-4].split('_')
                         self.optimal_epoch = int(info[0])
         self.model.load_state_dict(torch.load('{}{}_{}.pth'.format(self.checkpoint_dir, self.model_name,
-                                                                   self.optimal_epoch)))
+                                                                   self.optimal_epoch)), strict=False)
         self.model.train(False)
 
         with torch.no_grad():
