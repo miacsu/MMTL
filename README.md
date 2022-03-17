@@ -14,7 +14,7 @@ As is shown in Fig.1. , we propose an MRI-based multi-task decoupled learning (M
 In this code, "config.json" places the model's hyperparameters and other information. "model.py" places the main CNN model. "model_wrapper.py" encapsulates the training, validation and testing process of the model. "model.py" encapsulates the main CNN model. "dataloader.py" encapsulates the data usage process required by the model. "loss.py" contains forward and backward computations for part of the model's loss.
 
 ## How to run this project:
-This project must run in python>=2.7, The following steps should be taken to run this project:
+This project must run in python>=3.6, The following steps should be taken to run this project:
 
 1. Data preparation: Before the code can run, the data needs to be prepared. You need to put a file named "dataset.csv" in the "opencsv" folder. "dataset" is the name of the dataset in the configuration file. In this csv files, subjects' AD labels and MMSE scores should be placed in the second and third columns respectively.
 
