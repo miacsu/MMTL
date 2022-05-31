@@ -1,10 +1,10 @@
 Copyright (C) 2022 Xu Tian (tianxu@csu.edu.cn), Jin Liu (liujin06@csu.edu.cn)
 
 ## Package Title: 
-MRI-based Multi-task Interaction Learning for Alzheimer's Disease Detection and MMSE Score Prediction: A Multi-site Validation
+MRI-based Multi-task Interaction Learning for Alzheimer's Disease Diagnosis and MMSE Score Prediction: A Multi-site Validation
 
 ## Description:   
-This package is designed to enable multi-task decoupled representation learning and automatic diagnosis and MMSE score prediction of AD patients from structural magnetic resonance imaging (sMRI) brain scans.
+This package is designed to enable automatic AD diagnosis and MMSE score prediction through multi-task interaction learning from structural magnetic resonance imaging (sMRI) brain scans.
 
 ![Framework of our proposed method](image/framework.png)
 <p align="center">Fig. 1. Framework of our proposed method</p>
